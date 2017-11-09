@@ -1,8 +1,8 @@
-﻿[type=table] {/*根据自定义添加的属性type="table"来设置CSS样式的写法，即属性选择器*/
+﻿[type=table] {
     border: 2px solid rgba(255,255,255,0.2);
 }
 
-    [type=table]:hover {/*根据自定义添加的属性type="table"来设置CSS样式的写法，即属性选择器*/
+    [type=table]:hover {
         background-image: url(../image/model/plus.png);
         background-position: center;
         background-size: 20%;

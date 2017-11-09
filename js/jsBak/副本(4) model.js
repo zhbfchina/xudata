@@ -3,17 +3,13 @@
 /// <reference path="jquery-ui-1.8.20.js" />
 
 var host = "http://172.19.87.1";
-//将其他函数需要调用的变量设置为全局变量(此处是将生成Echarts图表所需变量定义为全局变量)
-var target;
-var op;
-var type1;
 $(function () {
     //点击事件：点击model.html中的加号，添加数据
     $("div[type=table]").on("click", function () {
         //定义一个变量，获取当前点击的table（即，那个大加号）
-        target = this;//后面可能会添加多个table（即，model页面的大加号），点击每个table都会弹出一个网页，并进行数据的添加，即下面的内容   这里的[0]是指第一个table 
-        //console.log($("div[type=table].table1"));
+        var target = $(this)[0];//后面可能会添加多个table（即，model页面的大加号），点击每个table都会弹出一个网页，并进行数据的添加，即下面的内容   这里的[0]是指第一个table
         //为什么定义此变量？目的将生成的图表放到一个DOM对象中，在setTable（生成Echarts表的模板）中，即，后面点击每个item图表时，item图表在哪生成（生成的item图表放在哪儿）
+
 
         $(".menu-shade").remove();//先移除class=“menu-shade”div下的内容，下面再重新动态生成
 
@@ -40,13 +36,23 @@ $(function () {
 
         html += '<div class="items-wrap">'
 
+        //每个item-wrap包裹一个item的位置（location）和相应容器（item-container）  每个包裹都需动态生成，然后将这些item-wrap包裹附加到class=“items-wrap”的div下
+        //html += '<div class="item-wrap"><div class="location-wrap">'
+        ////html += '<div class="location-tab">指挥中心</div>'
+        ////html += '<div class="location-tab">徐家汇派出所</div>'
+        //html += '</div><div class="item-container">'
+        ////for (var i = 0; i < 3; i++) {
+        ////    html += '<div class="item" f="item" type="bar" targer=""><div class="item-preview"></div><div class="item-title"><div>2017年度徐汇区</div></div></div>'
+        ////}
+        //每个item-wrap包裹一个item的位置（location）和相应容器（item-container）
+
         html += '</div>'
 
         html += '</div></div><div class="menu-close"></div></div>'
 
         //拼接与menu-shade的兄弟元素config-iframe-wrap
-        html += '<div class="config-iframe-wrap">'
-        html += '<iframe id="config-iframe" name="config-content" src="../item-config-index.html"></iframe>'
+        html+='<div class="config-iframe-wrap">'
+        html+='<iframe id="config-iframe" name="config-content" src="item-config-index.html"></iframe>'
         html += '</div>'
         //拼接与menu-shade的兄弟元素config-iframe-wrap
 
@@ -54,10 +60,12 @@ $(function () {
 
         $(".main").append(html);//class="main"的div下附加html
 
+
+
         //动态加载左侧导航栏中的数据
         $.ajax({
             cache: false,
-            type: "get",
+            type: "Get",
             url: "http://localhost:10633/web/Data/TestThirdPartData.txt",
             dataType: 'text',
             contentType: "application/json; charset=utf-8",
@@ -77,6 +85,9 @@ $(function () {
                     htmldata += '<div class="left-tab">' + data[i].dataType + '</div>';
                     $(".navigation").append(htmldata);
                 }
+
+
+
 
                 //为动态创建的每个导航目录注册单击事件 （即，点击class=“left-tab”的div时，为id=“location”的div下动态添加class=“location-tab”的div）(注意点击当前目录时，去除其它目录点击产生的内容)
                 //var data0 = data[0].dataType;
@@ -103,8 +114,8 @@ $(function () {
                         var htmllist = '';
                         if (list.length !== 0) {
                             for (var m = 0; m < list.length; m++) {
-                                htmllist += '<div class="item" tid="' + list[m].id + '" type="' + list[m].displayType + '" targer=""  data-parent-index="' + j + '"  data-index="' + m + '" select="' + unit[j].UnitNameAbbr + '_' + list[m].displayType + '"><div class="item-chart"><div class="item-preview"></div><div class="item-title"><div>' + list[m].dataName + '</div></div></div><div class="itemInfo"><p>数据来源自：' + list[m].dataSource + '</p><p>数据表是：' + list[m].dataTable + '</p></div></div>';
-
+                                htmllist += '<div class="item" tid="' + list[m].id + '" type="' + list[m].displayType + '" targer=""  data-parent-index="' + j + '"  data-index="' + m + '" select="' + unit[j].UnitNameAbbr + '_' + list[m].displayType + '"><div class="item-chart"><div class="item-preview"></div><div class="item-title"><div>' + list[m].dataName + '</div></div></div><div class="itemInfo"><p>数据来源自：'+list[m].dataSource+'</p><p>数据表是：'+list[m].dataTable+'</p></div></div>';
+                                
                             }
                         }
 
@@ -114,20 +125,20 @@ $(function () {
 
                     }
 
-                    //点击每个区下的图表
+                    //点击每个区下的图表（★★★★★如何取消当前点击？当点击下一个同类型的图表时，将当前图表产生的内容清除掉，为下个图表产生的内容做准备）
                     $(".item").on("click", function () {
                         //点击主页面上的item跳到配置页面，进行配置，再由配置界面返回此主界面
                         $('.config-iframe-wrap').css('display', 'block');//config-iframe-wrap是主页面CSS的样式（在modelzhz.css中）
 
-                        ////生成、跳转到对应的Echarts图表界面（此步骤是在配置页面点击“保存”按钮后，根据配置信息来生成图表，）
-                        parentIndex = $(this).attr("data-parent-index");//获取当前点击的父索引
-                        itemIndex = $(this).data("index");//获取当前点击item的索引
+                        ////生成、跳转到对应的Echarts图表界面（此步骤是在配置页面点击“保存”按钮后，根据配置信息来生成图表，待做★★★★★★）
+                        //var parentIndex = $(this).attr("data-parent-index");//获取当前点击的父索引
+                        //var itemIndex = $(this).data("index");//获取当前点击item的索引
 
-                        op = unit[parentIndex].dataList[itemIndex];//将当前unit[j]下的dataList赋值给option
+                        //var op = unit[parentIndex].dataList[itemIndex];//将当前unit[j]下的dataList赋值给option
 
                         //console.log(op);
 
-                        type1 = $(this).attr("type");
+                        //var type1 = $(this).attr("type");
                         //setTable.set(target, op, type1, "");
                         //$(".menu-close").click();
 
@@ -190,15 +201,14 @@ $(function () {
             $(".menu-shade").remove();
         });
 
-    });
-
-    //点击“清空”，清除添加的图表
-    $(".clear-table").click(function (evt) {
-        $(this).parent().siblings().remove();
-        //取消事件冒泡
-        evt.stopPropagation();
-    });
+    })
 })
+
+//----------------制作配置页面的所写代码：目的是实现从主页面的item跳到配置页面，再从配置页面回来--------------------
+//通过iframe的src链接到配置界面
+//$(".item").click(function () {//此处点击的item，是主页面上的item容器中的每个item
+//    $('.config-iframe-wrap').css('display', 'block');//config-iframe-wrap是主页面CSS的样式（在modelzhz.css中）
+//})
 
 //在此父页面中定义一个关闭子页面的方法（关闭iframe框架下的html），目的：被子页面调用
 function closeIframe() {
@@ -223,39 +233,3 @@ function history_configPara(a, b) {
     module_ht_config_threshold = b;
 }
 //----------------制作配置页面的所写代码：目的是实现从主页面的item跳到配置页面，再从配置页面回来--------------------
-
-//根据“实时数据”的配置信息生成Echarts图表
-function setIntervalSetEchart() {
-    //当第一次点击“保存”后，立即调用set方法，跳到图表生成界面，而定时调用set方法，进而刷新图表的程序写在下面，定时刷新图表
-    setTable.set(target, op, type1, "");
-    $(".menu-close").click();//调用关闭方法（关闭弹出页面）
-
-
-    //通过设置定时器，来控制Echarts图表的生成
-    setInterval(function setEchart() {//★★★★★★注意：不需要设置形参，因为子页面调用此函数时就没有传参数
-        //调用生成图表的方法
-        setTable.set(target, op, type1, ""); 
-    }, parseInt(module_rt_config_interval));
-
-    var htmlClear = '<div class="clear-table-wrap"><div class="clear-table">清空</div></div>';
-    $(".table-container-left-up").prepend(htmlClear);
-}
-//根据后台数据直接生成图表，没有添加任何配置界面的配置信息
-function setEchart() {//★★★★★★注意：不需要设置形参，因为子页面调用此函数时就没有传参数
-
-    var htmlClear = '<div class="clear-table-wrap"><div class="clear-table">清空</div></div>';
-    $(".table-container-left-up").prepend(htmlClear);
-
-    //调用生成图表的方法
-    setTable.set(target, op, type1, "");
-    $(".menu-close").click();//调用关闭方法（关闭弹出页面）
-}
-//根据“历史数据”的配置信息生成Echarts图表
-function historySetEchart() {
-    setEchart();
-    //根据配置界面的“历史数据”配置参数，生成图表
-}
-
-//讨论的（待做）：
-//var user;
-//var arr = {"PlanID":"00000000-0000-0000-0000-000000000000","PlanName":null,"ModelID":null,"CreateUser":null,"CreateTime":"0001-01-01T00:00:00","Modules":[{"ModuleNumber":0,"DataCode":"00000000-0000-0000-0000-000000000000","Config":{"IsHistory":false,"RefrashTime":0,"HistoryDayGap":0,"LimitValue":null}}]};
