@@ -5,6 +5,7 @@ var setTable = function () {
         console.log(data);//在控制台查看传过来的data是什么
         var myChart = echarts.init(target, 'dark');//target:为ECharts准备一个具备大小（宽高）的Dom,var myChart = echarts.init(document.getElementById('main'));，即，生成的item图表放在哪儿
 
+
         //如果series中的对象比较多，而我们又需要获取所有对象的name值，那么可以遍历这个series数组，把每一个对象的name值都取出来
         var names = [];
         for (var i = 0; i < data.series.length; i++) {
@@ -55,6 +56,9 @@ var setTable = function () {
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option1);
         //myChart.setOption(option2);
+
+        //浏览器大小改变时重置大小
+        window.onresize = myChart.resize;
     }
 
     return {

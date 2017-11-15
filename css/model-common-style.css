@@ -1,0 +1,28 @@
+﻿/*“清空”按钮的样式*/
+.clear-table-wrap {
+    width: auto;
+    height: 5%;
+    z-index: 9999;
+    /*display: none;*/
+    opacity: 0;
+}
+
+    .clear-table-wrap:hover {
+        /*display: block;*/
+        cursor: pointer;
+        /*background-color: pink;*/
+        opacity: 1; /*不透明度：通过不透明度来实现层的显示效果*/
+    }
+
+.clear-table {
+    width: 10%;
+    float: right;
+    margin-right: 5%;
+    margin-top: 2%;
+    font-size: 1.2em;
+    color: powderblue;
+    text-align: center;
+    border: 1px solid #00a1e9;
+}
+
+

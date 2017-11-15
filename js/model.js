@@ -10,136 +10,146 @@ var type1;
 $(function () {
     //点击事件：点击model.html中的加号，添加数据
     $("div[type=table]").on("click", function () {
-        //定义一个变量，获取当前点击的table（即，那个大加号）
-        target = this;//后面可能会添加多个table（即，model页面的大加号），点击每个table都会弹出一个网页，并进行数据的添加，即下面的内容   这里的[0]是指第一个table 
-        //console.log($("div[type=table].table1"));
-        //为什么定义此变量？目的将生成的图表放到一个DOM对象中，在setTable（生成Echarts表的模板）中，即，后面点击每个item图表时，item图表在哪生成（生成的item图表放在哪儿）
+        ////如果
+        if ($(this).children(".clear-table-wrap").length == 0) {
+            //console.log($(this).length);
+            //定义一个变量，获取当前点击的table（即，那个大加号）
+            target = this;//后面可能会添加多个table（即，model页面的大加号），点击每个table都会弹出一个网页，并进行数据的添加，即下面的内容   这里的[0]是指第一个table 
+            //console.log($("div[type=table].table1"));
+            console.log(target);
+            //为什么定义此变量？目的将生成的图表放到一个DOM对象中，在setTable（生成Echarts表的模板）中，即，后面点击每个item图表时，item图表在哪生成（生成的item图表放在哪儿）
 
-        $(".menu-shade").remove();//先移除class=“menu-shade”div下的内容，下面再重新动态生成
+            $(".menu-shade").remove();//先移除class=“menu-shade”div下的内容，下面再重新动态生成
 
-        //弹出窗口的html网页拼接部分（是不是可以采用调用网页模板的形式或采用NVictory方式拼接html网页）
-        var html = '<div class="menu-shade"><div class="menu">'
-        html += '<div class="navigation">'
-        //html += '<div class="left-tab">110警情</div>'
-        //html += '<div class="left-tab">电子警察</div>'
-        html += '</div><div class="content">'
-        html += '<div class="select-wrap">'
-        html += '<div id="selectID" class="select select2">筛选</div>'
-        html += '</div>'
+            //弹出窗口的html网页拼接部分（是不是可以采用调用网页模板的形式或采用NVictory方式拼接html网页）
+            var html = '<div class="menu-shade"><div class="menu">'
+            html += '<div class="navigation">'
+            //html += '<div class="left-tab">110警情</div>'
+            //html += '<div class="left-tab">电子警察</div>'
+            html += '</div><div class="content">'
+            html += '<div class="select-wrap">'
+            html += '<div id="selectID" class="select select2">筛选</div>'
+            html += '</div>'
 
-        //动态添加筛选的div
-        html += '<div id="selectDiv">'
-        html += '<div class="itemType">'
-        html += '<div type="scatter">单轴散点图</div><div type="line">基本折线图</div><div type="bar">基本柱状图</div><div type="bar">堆叠柱状图</div><div type="bar">正负轴柱状图</div><div type="pie">基本饼图</div><div type="pie">嵌套饼图</div><div type="pie">玫瑰图</div><div type="treemap">矩形树图</div><div type="sankey">桑基图</div><div type="heatmap">年日历图</div><div type="scatter">月日历图</div><div type="radar">雷达图</div><div type="effectScatter">地图散点图</div><div type="lines">地图迁徙图</div>'
-        html += '</div>'
-        html += '<div class="itemType">'
-        html += '<div type="FJ">分局</div><div type="ZA">治安支队</div><div type="XJH">徐家汇</div><div type="FL">枫林</div><div type="TP">天平</div><div type="HN">湖南</div><div type="HM">虹梅</div><div type="XT">斜土</div><div type="HJ">华泾</div><div type="CHJ">漕河泾</div><div type="LH">龙华</div><div type="CQ">长桥</div><div type="TL">田林</div><div type="KJ">康健</div><div type="LY">凌云</div><div type="NZ">南站</div><div type="ST">上体</div>'
-        html += '</div>'
-        html += '</div>'
-        //动态添加筛选的div
+            //动态添加筛选的div
+            html += '<div id="selectDiv">'
+            html += '<div class="itemType">'
+            html += '<div type="scatter">单轴散点图</div><div type="line">基本折线图</div><div type="bar">基本柱状图</div><div type="bar">堆叠柱状图</div><div type="bar">正负轴柱状图</div><div type="pie">基本饼图</div><div type="pie">嵌套饼图</div><div type="pie">玫瑰图</div><div type="treemap">矩形树图</div><div type="sankey">桑基图</div><div type="heatmap">年日历图</div><div type="scatter">月日历图</div><div type="radar">雷达图</div><div type="effectScatter">地图散点图</div><div type="lines">地图迁徙图</div>'
+            html += '</div>'
+            html += '<div class="itemType">'
+            html += '<div type="FJ">分局</div><div type="ZA">治安支队</div><div type="XJH">徐家汇</div><div type="FL">枫林</div><div type="TP">天平</div><div type="HN">湖南</div><div type="HM">虹梅</div><div type="XT">斜土</div><div type="HJ">华泾</div><div type="CHJ">漕河泾</div><div type="LH">龙华</div><div type="CQ">长桥</div><div type="TL">田林</div><div type="KJ">康健</div><div type="LY">凌云</div><div type="NZ">南站</div><div type="ST">上体</div>'
+            html += '</div>'
+            html += '</div>'
+            //动态添加筛选的div
 
-        html += '<div class="items-wrap">'
+            html += '<div class="items-wrap">'
 
-        html += '</div>'
+            html += '</div>'
 
-        html += '</div></div><div class="menu-close"></div></div>'
+            html += '</div></div><div class="menu-close"></div></div>'
 
-        //拼接与menu-shade的兄弟元素config-iframe-wrap
-        html += '<div class="config-iframe-wrap">'
-        html += '<iframe id="config-iframe" name="config-content" src="../item-config-index.html"></iframe>'
-        html += '</div>'
-        //拼接与menu-shade的兄弟元素config-iframe-wrap
+            //拼接与menu-shade的兄弟元素config-iframe-wrap
+            html += '<div class="config-iframe-wrap">'
+            html += '<iframe id="config-iframe" name="config-content" src="../item-config-index.html"></iframe>'
+            html += '</div>'
+            //拼接与menu-shade的兄弟元素config-iframe-wrap
 
-        //弹出窗口的html网页拼接部分（是不是可以采用调用网页模板的形式或采用NVictory方式拼接html网页）
+            //弹出窗口的html网页拼接部分（是不是可以采用调用网页模板的形式或采用NVictory方式拼接html网页）
 
-        $(".main").append(html);//class="main"的div下附加html
+            $(".main").append(html);//class="main"的div下附加html
 
-        //动态加载左侧导航栏中的数据
-        $.ajax({
-            cache: false,
-            type: "get",
-            url: "http://localhost:10633/web/Data/TestThirdPartData.txt",
-            dataType: 'text',
-            contentType: "application/json; charset=utf-8",
-            //url:http://172.19.87.1/xhq/SystemApi.ashx?req_type=5&username=admin&athcode=1,
-            //url: host + "/xhq/SystemApi.ashx?req_type=5&username=admin&athcode=1",
-            //dataType: "jsonp",
-            async: false,
-            success: function (response) {
-                //var data = eval("(" + response.Data + ")")//将json字符串转换为json对象（调用后台给的URL时，使用此写法）
-                var data = eval("(" + response + ")")//调用本地文件（txt（utf8格式））时，使用此写法
-                //console.log(response);//在控制台检查接收到的数据
+            //动态加载左侧导航栏中的数据
+            $.ajax({
+                cache: false,
+                type: "get",
+                url: "http://localhost:10633/web/Data/TestThirdPartData.txt",
+                dataType: 'text',
+                contentType: "application/json; charset=utf-8",
+                //url:http://172.19.87.1/xhq/SystemApi.ashx?req_type=5&username=admin&athcode=1,
+                //url: host + "/xhq/SystemApi.ashx?req_type=5&username=admin&athcode=1",
+                //dataType: "jsonp",
+                async: false,
+                success: function (response) {
+                    //var data = eval("(" + response.Data + ")")//将json字符串转换为json对象（调用后台给的URL时，使用此写法）
+                    var data = eval("(" + response + ")")//调用本地文件（txt（utf8格式））时，使用此写法
+                    //console.log(response);//在控制台检查接收到的数据
 
-                //动态创建导航目录
-                //循环遍历第一层data下的每个对象，并调用每个对象中的键（dataType和UnitData）
-                for (var i = 0; i < data.length; i++) {
-                    var htmldata = '';
-                    htmldata += '<div class="left-tab">' + data[i].dataType + '</div>';
-                    $(".navigation").append(htmldata);
-                }
+                    //动态创建导航目录
+                    //循环遍历第一层data下的每个对象，并调用每个对象中的键（dataType和UnitData）
+                    for (var i = 0; i < data.length; i++) {
+                        var htmldata = '';
+                        htmldata += '<div class="left-tab">' + data[i].dataType + '</div>';
+                        $(".navigation").append(htmldata);
+                    }
 
-                //为动态创建的每个导航目录注册单击事件 （即，点击class=“left-tab”的div时，为id=“location”的div下动态添加class=“location-tab”的div）(注意点击当前目录时，去除其它目录点击产生的内容)
-                //var data0 = data[0].dataType;
-                //console.log(data[0]);
-                $(".left-tab").on("click", function () {
+                    //为动态创建的每个导航目录注册单击事件 （即，点击class=“left-tab”的div时，为id=“location”的div下动态添加class=“location-tab”的div）(注意点击当前目录时，去除其它目录点击产生的内容)
+                    //var data0 = data[0].dataType;
+                    //console.log(data[0]);
+                    $(".left-tab").on("click", function () {
 
-                    //当点击左侧导航目录时，先移除需要动态生成的div（即，清除之前点击，页面动态生成的div）
+                        //当点击左侧导航目录时，先移除需要动态生成的div（即，清除之前点击，页面动态生成的div）
 
-                    $(".item-wrap").remove();
+                        $(".item-wrap").remove();
 
-                    var dataIndex = $(this).index();//获取当前点击导航目录的索引(★★★★★重点)
-                    unit = data[dataIndex].UnitData;//获取data中的UnitData对象 当变量不加var时，此变量是全局变量
-                    //将导航中所对应的UnitData中的所有unitName循环遍历出来
-                    //循环遍历第二层UnitData下的每个对象，每个对象包含键（UnitName、dataList）
-                    for (var j = 0; j < unit.length; j++) {
-                        var htmlunit = '';
-                        htmlunit += '<div class="item-wrap" ><div class="location-wrap"><div class="location-tab">' + unit[j].UnitName + '</div></div><div class="item-container">';
+                        var dataIndex = $(this).index();//获取当前点击导航目录的索引(★★★★★重点)
+                        unit = data[dataIndex].UnitData;//获取data中的UnitData对象 当变量不加var时，此变量是全局变量
+                        //将导航中所对应的UnitData中的所有unitName循环遍历出来
+                        //循环遍历第二层UnitData下的每个对象，每个对象包含键（UnitName、dataList）
+                        for (var j = 0; j < unit.length; j++) {
+                            var htmlunit = '';
+                            htmlunit += '<div class="item-wrap" ><div class="location-wrap"><div class="location-tab">' + unit[j].UnitName + '</div></div><div class="item-container">';
 
-                        //$(".location-wrap").append(htmlunit);//将动态生成的div附加到相应的div下（此处将htmlunit追加到id=“location”的div下） 
+                            //$(".location-wrap").append(htmlunit);//将动态生成的div附加到相应的div下（此处将htmlunit追加到id=“location”的div下） 
 
-                        //循环遍历，将dataList对象中的id、displayType、dataName放到指定的div中
-                        var list = unit[j].dataList;//获取当前data[dataIndex]中dataList对象
-                        //循环遍历dataList下的每个对象，dataList中对象的个数可能为0
-                        var htmllist = '';
-                        if (list.length !== 0) {
-                            for (var m = 0; m < list.length; m++) {
-                                htmllist += '<div class="item" tid="' + list[m].id + '" type="' + list[m].displayType + '" targer=""  data-parent-index="' + j + '"  data-index="' + m + '" select="' + unit[j].UnitNameAbbr + '_' + list[m].displayType + '"><div class="item-chart"><div class="item-preview"></div><div class="item-title"><div>' + list[m].dataName + '</div></div></div><div class="itemInfo"><p>数据来源自：' + list[m].dataSource + '</p><p>数据表是：' + list[m].dataTable + '</p></div></div>';
+                            //循环遍历，将dataList对象中的id、displayType、dataName放到指定的div中
+                            var list = unit[j].dataList;//获取当前data[dataIndex]中dataList对象
+                            //循环遍历dataList下的每个对象，dataList中对象的个数可能为0
+                            var htmllist = '';
+                            if (list.length !== 0) {
+                                for (var m = 0; m < list.length; m++) {
+                                    htmllist += '<div class="item" tid="' + list[m].id + '" type="' + list[m].displayType + '" targer=""  data-parent-index="' + j + '"  data-index="' + m + '" select="' + unit[j].UnitNameAbbr + '_' + list[m].displayType + '"><div class="item-chart"><div class="item-preview"></div><div class="item-title"><div>' + list[m].dataName + '</div></div></div><div class="itemInfo"><p>数据来源自：' + list[m].dataSource + '</p><p>数据表是：' + list[m].dataTable + '</p></div></div>';
 
+                                }
                             }
+
+                            //跳出内层for循环，进行html拼接
+                            htmlunit = htmlunit + htmllist + '</div></div>'
+                            $(".items-wrap").append(htmlunit);
+
                         }
 
-                        //跳出内层for循环，进行html拼接
-                        htmlunit = htmlunit + htmllist + '</div></div>'
-                        $(".items-wrap").append(htmlunit);
+                        //点击每个区下的图表
+                        $(".item").on("click", function () {
+                            //点击主页面上的item跳到配置页面，进行配置，再由配置界面返回此主界面
+                            $('.config-iframe-wrap').css('display', 'block');//config-iframe-wrap是主页面CSS的样式（在modelzhz.css中）
+
+                            ////生成、跳转到对应的Echarts图表界面（此步骤是在配置页面点击“保存”按钮后，根据配置信息来生成图表，）
+                            parentIndex = $(this).attr("data-parent-index");//获取当前点击的父索引
+                            itemIndex = $(this).data("index");//获取当前点击item的索引
+
+                            op = unit[parentIndex].dataList[itemIndex];//将当前unit[j]下的dataList赋值给option
+
+                            //console.log(op);
+
+                            type1 = $(this).attr("type");
+                            //setTable.set(target, op, type1, "");
+                            //$(".menu-close").click();
+
+                        });
 
                     }
 
-                    //点击每个区下的图表
-                    $(".item").on("click", function () {
-                        //点击主页面上的item跳到配置页面，进行配置，再由配置界面返回此主界面
-                        $('.config-iframe-wrap').css('display', 'block');//config-iframe-wrap是主页面CSS的样式（在modelzhz.css中）
-
-                        ////生成、跳转到对应的Echarts图表界面（此步骤是在配置页面点击“保存”按钮后，根据配置信息来生成图表，）
-                        parentIndex = $(this).attr("data-parent-index");//获取当前点击的父索引
-                        itemIndex = $(this).data("index");//获取当前点击item的索引
-
-                        op = unit[parentIndex].dataList[itemIndex];//将当前unit[j]下的dataList赋值给option
-
-                        //console.log(op);
-
-                        type1 = $(this).attr("type");
-                        //setTable.set(target, op, type1, "");
-                        //$(".menu-close").click();
-
-                    });
+                  )
 
                 }
 
-              )
+            })
+        } else {
 
-            }
+        }
+        
 
-        })
+
 
         //点击筛选按钮
         $('#selectID').on("click", function () {
@@ -192,12 +202,12 @@ $(function () {
 
     });
 
-    //点击“清空”，清除添加的图表
-    $(".clear-table").click(function (evt) {
-        $(this).parent().siblings().remove();
-        //取消事件冒泡
-        evt.stopPropagation();
-    });
+    ////点击“清空”，清除添加的图表   ★★★★★事件的绑定问题：如果直接放在页面加载函数下，则当页面加载完成后，会依次为当前DOM树中元素绑定事件，即，为div[type=table]、clear-table绑定事件（单击事件），然而，在页面加载完成后，DOM树中没有clear-table元素，所以，就无法触发这个元素的事件，这个元素，是点击div[type=table]的事件然后调用函数第二次生成的DOM元素，所以应该在此时利用$(".clear-table")来获取第二次渲染生成的DOM树中的元素，为其绑定事件，这样才能触发此事件
+    //$(".clear-table").on("click", function (evt) {
+    //    $(this).parent().siblings().remove();
+    //    //取消事件冒泡
+    //    evt.stopPropagation();
+    //});
 })
 
 //在此父页面中定义一个关闭子页面的方法（关闭iframe框架下的html），目的：被子页面调用
@@ -230,7 +240,6 @@ function setIntervalSetEchart() {
     setTable.set(target, op, type1, "");
     $(".menu-close").click();//调用关闭方法（关闭弹出页面）
 
-
     //通过设置定时器，来控制Echarts图表的生成
     setInterval(function setEchart() {//★★★★★★注意：不需要设置形参，因为子页面调用此函数时就没有传参数
         //调用生成图表的方法
@@ -238,7 +247,22 @@ function setIntervalSetEchart() {
     }, parseInt(module_rt_config_interval));
 
     var htmlClear = '<div class="clear-table-wrap"><div class="clear-table">清空</div></div>';
-    $(".table-container-left-up").prepend(htmlClear);
+    //$(".table-container-left-up").prepend(htmlClear);
+    $(target).prepend(htmlClear);
+
+    //点击“清空”，清除添加的图表   ★★★★★事件的绑定问题：如果直接放在页面加载函数下，则当页面加载完成后，会依次为当前DOM树中元素绑定事件，即，为div[type=table]、clear-table绑定事件（单击事件），然而，在页面加载完成后，DOM树中没有clear-table元素，所以，就无法触发这个元素的事件，这个元素，是点击div[type=table]的事件然后调用函数第二次生成的DOM元素，所以应该在此时利用$(".clear-table")来获取第二次渲染生成的DOM树中的元素，为其绑定事件，这样才能触发此事件
+    $(".clear-table").on("click", function (evt) {
+        $(this).parent().siblings().remove();
+        $(this).parent().parent().removeAttr("style");
+        $(this).parent().parent().removeAttr("_echarts_instance_");
+        
+        $(this).parent().remove();
+        $(this).remove();
+        //取消事件冒泡
+        evt.stopPropagation();
+
+    });
+   
 }
 //根据后台数据直接生成图表，没有添加任何配置界面的配置信息
 function setEchart() {//★★★★★★注意：不需要设置形参，因为子页面调用此函数时就没有传参数
