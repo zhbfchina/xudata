@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>模板三</title>
+    <link href="../../css/template3.css" rel="stylesheet" />
+    <link href="../../css/scrollbar.css" rel="stylesheet" />
+    <link href="../../library/jquery-ui-1.8.16/themes/base/jquery.ui.all.css" rel="stylesheet" />
+
+    <link href="../../css/model3.css" rel="stylesheet" />
+    <link href="../../css/item-config-index.css" rel="stylesheet" />
+    <link href="../../css/model-common-style.css" rel="stylesheet" />
+    <link href="../../css/data-select.css" rel="stylesheet" />
+
+    <!--在Echarts图表中使用leaflet地图时添加的，引入文件时注意：将主文件放在前面，其他插件放在其后。例如，main.min.js放在echarts.js后面-->
+    <link href="../../css/leaflet/leaflet.css" rel="stylesheet" />
+    <script src="../../library/echart/echarts.js"></script>
+    <script src="../../js/leaflet/main.min.js"></script>
+
+    <script src="../../js/jquery-3.2.1.js"></script> 
+    <script src="../../js/jquery.cookie.js"></script>
+    <script src="../../library/jquery-ui-1.8.16/ui/jquery-ui.js"></script>
+
+    <script src="../../library/echart/dark.js"></script>
+    <!--实现截屏功能时引用的插件：html2Canvas-->
+    <script src="../../library/Canvas/html2canvas-0.5.js"></script>
+    <!--采用cdn上的html2canvas.js-->
+    <!--<script type="text/javascript" src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>-->
+    <!--<script src="../../library/Canvas/html2canvas-1.0-alpha.js"></script>-->
+    
+
+    <script src="../../js/setTable.js"></script>
+    <script src="../../js/model.js"></script>
+    <script src="../../js/item-config-index.js"></script>
+   <!--调用打开预案的js-->
+    <script src="../../js/openPlan.js"></script>
+    <!--调用提取的公共方法 --> 
+    <script src="../../js/xhutility.js"></script>
+
+</head>
+<body>
+    <div class="logo">
+        <div class="title-wrap">
+            <input type="text" name="name"  placeholder="添加标题" value="" id="title" class="title" />
+            <input type="submit" name="name" value="保存" />
+        </div>
+    </div>
+    <div class="main">
+        <div class="table-container">
+            <div id="table1" class="table-container-left-up" type="table" data-index="1">
+
+            </div>
+            <div id="table2" class="table-container-left-down" type="table" data-index="2"></div>
+        </div>
+        <div class="table-container">
+            <div id="table3" class="table-container-middle-up" type="table" data-index="3"></div>
+            <div id="table4" class="table-container-middle-down" type="table" data-index="4"></div>
+        </div>
+        <div class="table-container">
+            <div id="table5" class="table-container-right-up" type="table" data-index="5"></div>
+            <div id="table6" class="table-container-right-down" type="table" data-index="6"></div>
+        </div>
+    </div>
+
+    <!--将model3独有的部分写在一个js文件中，和公共的model.js区分开-->
+    <script type="text/javascript">
+        //公共部分的plan函数要获取每个模板的ID，所以在此声明一个变量代表当前模板的ID
+        var currentModelID = "model3";//此句是自己添加的
+        //下面的这个是引用jQuery-UI设计“保存”按钮时，自动生成的代码片段，该方法将通知 Web 浏览器不要执行与事件关联的默认动作（如果存在这样的动作）。
+        $("input[type=submit]").button().click(function (event) {
+            event.preventDefault();
+        });
+    </script>
+</body>
+</html>

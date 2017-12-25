@@ -1,0 +1,232 @@
+﻿.item-shade {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    /*表现性属性*/
+    background-color: rgba(0,0,0,0.3);
+}
+
+.config-item {
+    position: absolute;
+    top: 17.5%;
+    left: 22.5%;
+    z-index: 16;
+    width: 55%;
+    height: 65%;
+    /*表现性属性*/
+    background-color: #eae7ff;
+}
+
+.config-navigation {
+    position: relative;
+    width: 100%;
+    height: 15%;
+    /*表现性属性*/
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.nav-left-wrap {
+    float: left;
+    width: 38%;
+}
+
+.top-tab {
+    /*结构性属性*/
+    width: 35%;
+    height: 34%;
+    padding: 0.5%;
+    margin-left: 10%;
+    margin-top: 6%;
+    /*表现属性*/
+    display: inline-block;
+    font-size: 2.3vh;
+    text-align: center;
+    border: 1px solid;
+}
+
+    .top-tab:hover {
+        background-color: #494462;
+        color: white;
+    }
+
+.nav-right-wrap {
+    float: right;
+    width: 23%;
+}
+
+.right-tab {
+    /*结构性属性*/
+    width: 35%;
+    height: 34%;
+    padding: 0.5%;
+    margin-right: 10%;
+    margin-top: 10%;
+    /*表现性属性*/
+    display: inline-block;
+    font-size: 2.3vh;
+    text-align: center;
+    border: 1px solid;
+}
+
+    .right-tab:hover {
+        background-color: #494462;
+        color: white;
+    }
+
+.config-content {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 84%;
+}
+
+#mainframe {
+    width: 99%;
+    height: 100%;
+    border: none;
+}
+/*设置导航标签选中和未选中的状态，即设置背景色颜色*/
+.real-time-data_unclick {
+    background-color: #eae7ff;
+}
+
+.real-time-data_click {
+    background-color: #494462;
+    color: white;
+}
+
+.history-data_unclick {
+    background-color: #eae7ff;
+}
+
+.history-data_click {
+    background-color: #494462;
+    color: white;
+}
+
+/*测试：设置iframe框架用来盛放配置网页*/
+.config-iframe-wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    /*z-index: 20;*/
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+/*实时数据与历史数据对应的content层样式设计*/
+html {
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    height: 100vh;
+    margin: 0px;
+}
+
+.real-time {
+    width: 97%;
+    height: 61%;
+    margin-left: 3%;
+    background-color: #dad7f2;
+}
+
+.real-time-nav-wrap {
+    width: 100%;
+    height: 25%;
+    background-color: #c2bfde;
+}
+
+.real-time-nav {
+    width: 8%;
+    height: 30%;
+    padding: 0.5%;
+    margin-top: 1%;
+    display: inline-block;
+    text-align: center;
+}
+
+.update-interval-wrap {
+    width: 100%;
+    height: 75%;
+    background-color: #dad7f2;
+}
+
+
+.update-interval {
+    position: relative;
+    left: 10%;
+    top: 40%;
+}
+
+    .update-interval input {
+        /*background-color: #c2bfde;*/ /*由于设置背景颜色，造成文本输入框给人一种3D效果*/
+    }
+
+.threshold-update-wrap {
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+}
+
+.threshold-update {
+    width: 9%;
+    height: 30%;
+    padding: 0.5%;
+    margin-left: 4%;
+    display: inline-block;
+    font-size: 1em;
+    text-align: center;
+    border: 1px solid;
+}
+
+.threshold-update-content {
+    width: 97%;
+    height: 45%;
+    margin-left: 3%;
+    background-color: #dad7f2;
+}
+
+.threshold-update-value {
+    position: relative;
+    left: 10%;
+    top: 40%;
+}
+
+    .threshold-update-value input {
+        /*background-color: #c2bfde;*/ /*由于设置背景颜色，造成文本输入框给人一种3D效果*/
+    }
+
+/*设置historyData.html中的CSS样式*/
+.inputs-wrap {
+    position: relative;
+    left: 10%;
+    top: 25%;
+}
+
+.inputs input {
+    display: inline-block;
+}
+
+.inputs-div {
+    display: inline-block;
+    width: 10%;
+}
+/*利用tab控件实现tab与各自对应的content建立连接、联动*/
+/*点击tab后背景颜色处于选中状态*/
+.tab-click {
+    background-color: #494462;
+    color: white;
+}
+
+.content-item {
+    height: 66%;
+    width: 97%;
+}

@@ -1,0 +1,99 @@
+html{
+    height: 100%;
+    overflow: hidden;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+body{
+    color:white;
+    font-family:Arial,'Microsoft YaHei';
+    height:100%;
+    background-image: url(../image/login/bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px;
+}
+
+.title{
+    width:100%;
+    font-size: 5vh;
+    height:5.5em;
+}
+.logo{
+    width:100%;
+    height:75%;
+    background-image: url(../image/login/logo.png);
+    background-repeat: no-repeat;
+    background-size: 7%;
+    background-position: center;
+    background-position-y:75%;
+}
+#title{
+    letter-spacing: 0.2em;
+    text-align: center;
+    font-weight: bold;
+}
+.container{
+    background-image: url(../image/login/login.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width:100%;
+    height: 69%;
+    margin-top:1%;
+    margin-bottom:1%;
+}
+.user{
+    text-align: center;
+    position: relative;
+    top: 32%;
+    left: 3%;
+}
+.password{
+    position: relative;
+    text-align: center;
+    top: 37%;
+    left: 3.7%;
+}
+.text{
+    display: inline-block;
+    font-size: 2.8vh;
+}
+.input{
+    color:black !important;
+    display: inline-block;
+}
+.input input{
+    font-size: 2vh;
+    padding: 0.25em 1em 0.25em 1em;
+    height: 1.5em;
+    position: relative;
+    top: -0.25em;
+    margin-left: 1em;
+    width: 9em;
+    border-radius: 0.5em;
+    border: none;
+}
+.login{
+    background-image: url(../image/login/login_button.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 37%;
+    position: relative;
+    left: 63%;
+    top: 10%;
+    font-size: 2.77vh;
+    cursor:pointer;
+}
+.login span{
+    position: relative;
+    top: 42%;
+    left: 1%;
+}
+.copyright{
+    position: absolute;
+    font-size: 1.887vh;
+    bottom: 0.5em;
+    right: 1em;
+}

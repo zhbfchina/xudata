@@ -1,0 +1,187 @@
+﻿body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+}
+
+.header-wrapper {
+    height: 12%;
+    background-color: #484462;
+}
+
+.header-wrapper-left {
+    position: relative;
+    float: left;
+    width: 48%;
+    height: 100%;
+}
+
+.logo-img {
+    margin-left: 5%;
+    margin-top: 1.5%;
+}
+
+.header-wrapper-right {
+    float: right;
+    margin-top: 2%;
+    width: 40%;
+    height: 45%;
+    margin-right: 2%;
+}
+
+.search-input {
+    float: right;
+    width: 32%;
+    height: 70%;
+    display: inline-block;
+    border-radius: 4vh 0 0 4vh;
+    background-color: #5b5772;
+    border-style: hidden;
+    font-size: 1.1em;
+    text-align: center;
+    color: #DBDBDB;
+    outline: none;
+}
+
+.search-icon-wrapper {
+    float: right;
+    width: 6%;
+    height: 76%;
+    display: inline-flex;
+    border-radius: 0 4vh 4vh 0;
+    background-color: #5b5772;
+    border-style: hidden;
+}
+
+.search-icon {
+    width: 90%;
+    height: 100%;
+    margin-top: 13%;
+    background-image: url(../../image/planListImage/search.png);
+    background-repeat: no-repeat;
+    background-size: 70% 70%;
+}
+
+.custom-wrap {
+    float: right;
+    width: 15%;
+    height: 75%;
+    display: inline-block;
+    text-align: center;
+    background-color: #5b5772;
+    border-radius: 4vh 4vh 4vh 4vh;
+    margin-right: 3%;
+}
+
+.custom {
+    line-height: 1.7;
+    color: white;
+    font-size: 1.1em;
+    line-height: 1.7;
+    cursor:pointer;
+}
+
+
+.body-content {
+    position: relative;
+    width: 100%;
+    height: 88%;
+    background: #0e0830;
+}
+
+.list-bar-wrap {
+    width: 100%;
+    height: 9%;
+}
+
+.list-bar {
+    width: 70%;
+    height: 51%;
+    background-color: #484462;
+    position: relative;
+    left: 15%;
+    top: 30%;
+}
+
+.plan-lists-wrapper {
+    position: relative;
+    left: 15%;
+    width: 70%;
+    height: 90%;
+}
+.plan-custom {
+    display: inline-block;
+    position: relative;
+    top: 2.2%;
+    width: 25%;
+    height: 35%;
+    margin: 3% 0% 0% 6%;
+    /*实现过渡效果：在一定的时间区间内平滑地过渡*/
+    transition: All 0.4s ease-in-out;
+    -webkit-transition: All 0.4s ease-in-out;
+    -moz-transition: All 0.4s ease-in-out;
+    -o-transition: All 0.4s ease-in-out;
+    /*添加背景图片*/
+    background-image:url(../../image/planList/plus.png);
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size: 30%;
+    background-color:#272145;
+    cursor:pointer;
+}
+/*鼠标经过图片时，实现图片的上移效果*/
+    .plan-custom:hover {
+        transform: translate(0,-10px);
+        -webkit-transform: translate(0,-10px);
+        -moz-transform: translate(0,-10px);
+        -o-transform: translate(0,-10px);
+        -ms-transform: translate(0,-10px);
+        -webkit-box-shadow: 0px 5px 15px #e5e5e5;
+        -moz-box-shadow: 0px 5px 15px #e5e5e5;
+        box-shadow: 0px 5px 15px #e5e5e5;
+    }
+    
+
+.img-list {
+    display: inline-block;
+    width: 25%;
+    height: 35%;
+    margin: 3% 0% 0% 6%;
+    /*实现过渡效果：在一定的时间区间内平滑地过渡*/
+    transition: All 0.4s ease-in-out;
+    -webkit-transition: All 0.4s ease-in-out;
+    -moz-transition: All 0.4s ease-in-out;
+    -o-transition: All 0.4s ease-in-out;
+}
+/*鼠标经过图片时，实现图片的上移效果*/
+    .img-list:hover {
+        transform: translate(0,-10px);
+        -webkit-transform: translate(0,-10px);
+        -moz-transform: translate(0,-10px);
+        -o-transform: translate(0,-10px);
+        -ms-transform: translate(0,-10px);
+        -webkit-box-shadow: 0px 5px 15px #e5e5e5;
+        -moz-box-shadow: 0px 5px 15px #e5e5e5;
+        box-shadow: 0px 5px 15px #e5e5e5;
+    }
+
+.img-box {
+    width: 100%;
+    height: 80%;
+    display: inline-block;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+
+.img-note {
+    display: inline-block;
+    width: 100%;
+    height: 19%;
+    text-align: center;
+    color: white;
+    background-color: #484462;
+    line-height: 2.3;
+}

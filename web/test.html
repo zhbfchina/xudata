@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="js/jquery-1.7.1.js"></script>
+</head>
+<body onload="onMyLoad()">
+    
+    <p>产品一</p>
+    <p>产品二</p>  
+    <p>产品三</p>
+    <p>产品四</p>
+    <p>产品五</p>
+    <script type="text/javascript">
+        //利用jQuery实现：为多个标签注册不同内容的单击事件
+        //$(function () {
+        //    $('p').each(function (i) {
+        //        $(this).click(function () {
+        //            alert(i+1)
+        //        });
+        //    });
+        //})
+
+        //项目中出现的问题：
+        //当加载第一个图表时，设置的时间阈值较小，当在其他框中加载图表时，由于更新速度快，使用的settable又是同一个，所以造成第一个图表也变成了当前框要加载的图表了
+        //问题的原因分析：由于在原setTable.js中“var setTable=function(){}()”此方式只能将自执行函数赋值给那一个对象setTable，即自适自终生成的图表对象就那一个，当点击其他图表框生成图表时采用的还是那个实例，并没有额外的实例化出新的对象供其使用，所以要另外定义一个函数专门实例化出一个个对象
+        //为解决项目中出现的问题而做的试验：JavaScript中的“闭包”知识点儿
+        function onMyLoad() {
+             
+            var arr = document.getElementsByTagName("p");
+            //第一种：通过循环，建立多个自执行函数
+            for (var i = 0; i < arr.length; i++) {
+                (function (arg) {//这个函数对象有一个本地私有变量arg(形参)，该函数的function scope的closure对象属性有两个引用：arr和i。i的值随外部改变，但是本地的私有变量(形参)arg不会受影响，其值在一开始被调用时就决定了
+                    arr[i].onclick = function () {//onclick函数实例的function scope的closure对象属性有一个引用arg
+                        alert(arg);//只要外部空间的arg不变，这里的引用值就不会改变
+                    }
+                })(i);//立即执行匿名函数，传递下标i(实参)
+            }
+
+            ////第二种：通过为对象增加额外的属性来实现
+            //for (var i = 0; i < arr.length; i++) {
+            //    //为当前数组项(当前p对象)添加一个名为i的属性，值为循环体i变量的值
+            //    //此时当前p对象的i属性并不是对循环体的i变量的引用，而是一个独立p对象的属性，属性值在声明的时候就确定了
+            //    arr[i].idx = i;
+                
+            //    //arr[i].outerText = "产品" + i;
+            //    arr[i].onclick = function () {
+            //        alert(this.idx);
+            //    }
+            //}
+            //for (var i = 0; i < arr.length; i++) {
+            //    arr[i].onclick=(function (arg) {
+            //        return function () {
+            //            alert(arg);
+                        
+            //        }
+            //    })(i);
+                
+            //}
+
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+﻿[type=table] { /*根据自定义添加的属性type="table"来设置CSS样式的写法，即属性选择器*/
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+    [type=table]:hover { /*根据自定义添加的属性type="table"来设置CSS样式的写法，即属性选择器*/
+        background-image: url(../image/model/plus.png);
+        background-position: center;
+        background-size: 20%;
+        background-repeat: no-repeat;
+        background-color: #272145;
+        cursor: pointer;
+    }
+
+
+/*测试：设置iframe框架用来盛放配置网页*/
+.config-iframe-wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    /*z-index: 20;*/
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+#config-iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 30;
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+    height: 100%;
+    border-width: 0px;
+}
+/*对模板进行样式设置*/
+.title-wrap {
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-align: center;
+}
+
+.title {
+    line-height: 323%;
+    display: inline;
+    font-size: 1.5em;
+}
+
+.time-update-wrap {
+    position: absolute;
+    left: 59%;
+    top: 5%;
+    color: rgba(165, 165, 165, 1);
+    font-size: 0.8em; /*em针对文字字体的大小设置*/
+}
+
+.time-update {
+    display: inline-block;
+}
+
+.date {
+    display: inline-block;
+}
+
+.table1 {
+    width: 30%;
+    height: 95%;
+    margin-top: 0.8%;
+    margin-left: 0.5%;
+    float: left;
+}
+
+.table-right {
+    width: 33%;
+    height: 46.2%;
+    float: right;
+    margin-top: 0.8%;
+    margin-right: 0.8%;
+}
+
+.table2 {
+}
+
+.table3 {
+}
+
+.table4 {
+}
+
+.table5 {
+}

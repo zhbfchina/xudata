@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+
+    <link href="../css/template.css" rel="stylesheet" />
+    <link href="../css/scrollbar.css" rel="stylesheet" />
+    <!--<link href="../css/model.css" rel="stylesheet" />-->
+
+    <link href="../css/modelzhz.css" rel="stylesheet" />
+
+    <script src="../js/jquery-1.7.1.js"></script>
+    <!--    <script src="../js/jQuery-2.1.4.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+
+    <script src="../library/echart/echarts.js"></script>
+    <script src="../library/echart/dark.js"></script>
+    <script src="../js/setTable.js"></script>
+    <script src="../js/model.js"></script>-->
+    <style type="text/css">
+        #selectDiv {
+            position: relative;
+            height: 30%;
+            width: 96%;
+            margin-left: 2%;
+            padding-top: 1%;
+            background-color: rgba(91, 155, 213, 1);
+            display: none;
+        }
+
+        .itemType {
+            width: 100%;
+            height: auto;
+            float: left;
+        }
+
+        #selectDiv .itemType div {
+            width: 16%;
+            height: 3%;
+            background-color: white;
+            margin: 1%;
+            float: left;
+            padding: 1%;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .itemInfo {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            position: absolute;
+        }
+
+        .item:hover .itemInfo {
+            /*visibility: hidden;*/
+            background-color: pink;
+            opacity: 0.2;
+        }
+
+        .item-chart {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript">
+        //window.onload = function () {
+        //    document.getElementById('selectID').onclick = function () {
+        //        var dvObj = document.getElementById('selectDiv');
+        //        // alert(dvObj.style.display);
+        //        if (dvObj.style.display == '' || dvObj.style.display == 'none') {
+        //            dvObj.style.display = "block";
+        //        } else {
+        //            dvObj.style.display = "none";
+        //        }
+
+        //    }
+        //}
+
+        //用jQuery方式写jQuery(document.getElementById()).onready=function(){}
+        $(function () {
+            //点击每个item时跳转到配置层
+            //$('.item').click(function () {
+            //    //直接跳转到配置层
+            //    //$(window).attr('location', "item-config-index.html");
+            //    //通过iframe跳转到配置层
+            //    $('#mainframe').attr('src', "item-config-index.html");
+            //})
+
+            //点击“筛选”时的事件
+            $('#selectID').on("click", function () {
+                var divObj = $('#selectDiv');
+                if (divObj.css('display') == 'none' || divObj.css('display') == '') {
+                    divObj.css('display', 'block');
+                } else {
+                    divObj.css('display', 'none');
+                }
+            })
+            //点击“筛选”时的事件
+
+
+            $(".itemType div").on("click", function () {//点击筛选层中的div
+
+                if ($(this).hasClass("active")) {//判断点击的div有没有class="active"，如果以前选过，再次选择时会清除class=“active”，可以通过CSS样式来标记之前选过，即标记它已被选中
+                    $(this).removeClass("active").css("background-color", "")
+                } else {
+                    $(this).addClass("active").css("background-color", "gray")
+                }
+
+
+                if ($(".itemType div.active").length == 0) {//如果条目类型中下的class=“active”个数等于0个
+                    $("div.item").each(function () {//获取地名下的每个item（即给地名下的图表）进行循环遍历，添加CSS样式，将图表全部显示出来
+                        $(this).css("display", "inline-block")
+                    })
+                }
+
+                else {//如果条目类型中下的class=“active”个数不等于0个
+                    $(".itemType div.active").each(function () {//获取条目类型中被选中的div，循环遍历
+                        var type = $(this).attr("type")//★★★★★大前提准备工作：为筛选对话框中的每个图表标签div设置一个type属性，并获取type中的字符串值
+                        $("div.item").each(function () {//获取地名下的每个item（即给地名下的图表）进行循环遍历，
+                            var select = $(this).attr("select")//★★★★★大前提准备工作：为地名标签设置一个特有的select，以便点击地名时能选到那个地名栏
+                            if (select.indexOf(type) >= 0) {//如果select值的字符串（每个item中定义的地名+图表类型，如xh_bar,xh_line）中包含type的值（图表筛选类型div定义的）     此判断意味着，只要下面各item中包含此类type就会被显示，否者被隐藏
+                                $(this).css("display", "inline-block")
+                            } else {
+                                $(this).css("display", "none")
+                            }
+                        })
+                    })
+                }
+            });
+
+            //鼠标经过图表框上方时显示隐藏的信息层
+            //第四次试验    利用CSS来实现：将数据隐藏层的不透明度opacity设置为0
+
+            ////第三次试验
+            ////鼠标移入
+            //$('.item').mouseenter(function () {
+            //    $(this).find('.itemInfo').css('position', 'absolute');
+            //    $(this).find('itemInfo').css()
+            //    $(this).find('.itemInfo').show();
+            //});
+            ////鼠标移出
+            //$('.item').mouseleave(function () {
+            //    $(this).find('.itemInfo').hide();
+            //});
+            //第三次试验
+
+            //第二次试验
+            //$('.item').mouseover(function () {
+            //    //获取隐藏的item信息层
+            //    $('itemInfo').css('display', 'block');
+            //    var itemInfoDV = $('itemInfo');
+            //    //显示item信息层相应的位置
+            //    itemInfoDV.offset({
+            //        left: $(this).offset().left,
+            //        top: $(this).css('top')
+            //    })
+            //});
+            ////鼠标移出图表框时隐藏信息层
+            //$('.item').mouseover(function () {
+            //    $('itemInfo').css('display', 'none');
+            //});
+            //第二次试验
+
+            //第一次试验
+            //document.getElementById('alink').onmouseover = function () {
+            //    //1、获取层对象
+            //    var dvObj = document.getElementById('dvDetails');
+            //    //显示层
+            //    dvObj.style.position = 'absolute';
+            //    dvObj.style.left = this.offsetLeft + 'px';//this在这里代表超链接层（alink）,this.offsetLeft表示超链接层(alink)相对它的上一层（zuiwaicengdiv）有多远
+            //    dvObj.style.top = this.offsetTop + this.offsetHeight + 'px';
+            //    //alert(dvObj.style.left)//测试查看dvObj.style.left
+            //}
+            //document.getElementById('alink').onmouseout = function () {
+            //    document.getElementById('dvDetails').style.display = 'none';
+            //}
+            //第一次试验
+            //鼠标经过图标框上方时显示隐藏的信息层
+        })
+
+    </script>
+</head>
+<body>
+    <div class="banner2"></div>
+    <div class="main">
+        <div type="table" style="width: 500px; height: 468px;">
+        </div>
+
+        <div class="menu-shade">
+            <div class="menu">
+                <div class="navigation">
+                    <div class="left-tab">110警情</div>
+                    <div class="left-tab">电子警察</div>
+                </div>
+                <div class="content">
+                    <!--筛选框，余灏哲直接绝对定位的，这里给一个div包裹着wrap-->
+                    <div class="select-wrap">
+                        <!--<div id="option" class="location-tab">筛选</div>-->
+                        <div id="selectID" class="select select2">筛选</div>
+                    </div>
+                    <div id="selectDiv">
+                        <div class="itemType">
+                            <div type="scatter">单轴散点图</div>
+                            <div type="line">基本折线图</div>
+                            <div type="bar">基本柱状图</div>
+                            <div type="bar">堆叠柱状图</div>
+                            <div type="bar">正负轴柱状图</div>
+                            <div type="pie">基本饼图</div>
+                            <div type="pie">嵌套饼图</div>
+                            <div type="pie">玫瑰图</div>
+                            <div type="treemap">矩形树图</div>
+                            <div type="sankey">桑基图</div>
+                            <div type="heatmap">年日历图</div>
+                            <div type="scatter">月日历图</div>
+                            <div type="radar">雷达图</div>
+                            <div type="effectScatter">地图散点图</div>
+                            <div type="lines">地图迁徙图</div>
+                        </div>
+                        <div class="itemType">
+                            <div type="FJ">分局</div>
+                            <div type="ZA">治安支队</div>
+                            <div type="XJH">徐家汇</div>
+                            <div type="FL">枫林</div>
+                            <div type="TP">天平</div>
+                            <div type="HN">湖南</div>
+                            <div type="HM">虹梅</div>
+                            <div type="XT">斜土</div>
+                            <div type="HJ">华泾</div>
+                            <div type="CHJ">漕河泾</div>
+                            <div type="LH">龙华</div>
+                            <div type="CQ">长桥</div>
+                            <div type="TL">田林</div>
+                            <div type="KJ">康健</div>
+                            <div type="LY">凌云</div>
+                            <div type="NZ">南站</div>
+                            <div type="ST">上体</div>
+                        </div>
+                    </div>
+
+                    <!--一个item的位置（location）和相应容器，被包裹在一个div中（item-wrap），将这些div包裹在一个大的div中（items-wrap）-->
+                    <div class="items-wrap">
+                        <div class="item-wrap">
+                            <div class="location-wrap">
+                                <div class="location-tab">指挥中心</div>
+                            </div>
+                            <div class="item-container">
+
+                                <a target="_self">
+                                    <div class="item" f="item" type="line" targer="item-config-index.html" select="zhzx_line">
+                                        <div class="item-chart">
+                                            <div class="item-preview"></div>
+                                            <div class="item-title">
+                                                <div>2017年度徐汇区</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="itemInfo">
+                                            <p>dataSource</p>
+                                            <p>dataTable</p>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                <div class="item" f="item" type="line" targer="" select="zhzx_line">
+                                    <div class="item-chart">
+                                        <div class="item-preview"></div>
+                                        <div class="item-title">
+                                            <div>2017年度徐汇区</div>
+                                        </div>
+                                    </div>
+                                    <div class="itemInfo">
+                                        <p>dataSource</p>
+                                        <p>dataTable</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="item-wrap">
+                        <div class="location-wrap">
+                            <div class="location-tab">徐家汇派出所</div>
+                        </div>
+                        <div class="item-container">
+                            <div class="item" f="item" type="bar" targer="" select="xjh_bar">
+                                <div class="item-chart">
+                                    <div class="item-preview"></div>
+                                    <div class="item-title">
+                                        <div>2017年度徐汇区</div>
+                                    </div>
+                                </div>
+
+                                <div class="itemInfo">
+                                    <p>dataSource</p>
+                                    <p>dataTable</p>
+                                </div>
+                            </div>
+
+                            <div class="item" f="item" type="bar" targer="" select="xjh_bar">
+                                <div class="item-chart">
+                                    <div class="item-preview"></div>
+                                    <div class="item-title">
+                                        <div>2017年度徐汇区</div>
+                                    </div>
+                                </div>
+
+                                <div class="itemInfo">
+                                    <p>dataSource</p>
+                                    <p>dataTable</p>
+                                </div>
+                            </div>
+                            <div class="item" f="item" type="bar" targer="" select="xjh_map">
+                                <div class="item-chart">
+                                    <div class="item-preview"></div>
+                                    <div class="item-title">
+                                        <div>2017年度徐汇区</div>
+                                    </div>
+                                </div>
+
+                                <div class="itemInfo">
+                                    <p>dataSource</p>
+                                    <p>dataTable</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--添加iframe框架，跳转到配置层-->
+        <!--<div class="config-iframe-wrap">
+            <iframe id="config-iframe" name="config-content" src="real-time-data.html"></iframe>
+        </div>-->
+    </div>
+    <div class="menu-close"></div>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿/*“清空”按钮的样式*/
+.clear-table-wrap {
+    width: 100%;
+    height: 10%;
+    
+    /*display: none;*/
+    opacity: 0;
+    z-index: 1000;/*解决在leaflet地图容器上添加div时被覆盖在地图下面的情况*/
+    position:absolute;/*解决在leaflet地图容器上添加div时被覆盖在地图下面的情况*/
+}
+
+    .clear-table-wrap:hover {
+        /*display: block;*/
+        cursor: pointer;
+        /*background-color: pink;*/
+        opacity: 1; /*不透明度：通过不透明度来实现层的显示效果*/
+        z-index: 1000; 
+    }
+
+.clear-table {
+    width: 10%;
+    float: right;
+    margin-right: 5%;
+    margin-top: 2%;
+    font-size: 1.2em;
+    color: powderblue;
+    text-align: center;
+    border: 1px solid #00a1e9;
+    z-index: 1000;
+}

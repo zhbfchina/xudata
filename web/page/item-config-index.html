@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>配置页</title>
+    <link href="../css/item-config-index.css" rel="stylesheet" />
+
+    
+    <script src="../js/jquery-3.2.1.js"></script>
+    <script src="../js/item-config-index.js"></script>
+
+</head>
+<body>
+    <div class="item-shade">
+        <div class="config-item">
+            <div class="config-navigation">
+                <div class="nav-left-wrap">
+                    <div id="real-time-data" class="top-tab real-time-data_unclick" type="real-time-data">实时数据</div>
+                    <div id="history-data" class="top-tab history-data_unclick" type="history-data">历史数据</div>
+                </div>
+                <div class="nav-right-wrap">
+                    <div class="right-tab save">保存</div>
+                    <div class="right-tab back">取消</div>
+                </div>
+            </div>
+            <div class="config-content">
+                <!--<iframe id="mainframe" name="config-content" src="real-time-data.html"></iframe>-->
+                <div id="real-time-content" class="content-item">
+                    <div class="real-time">
+                        <div class="real-time-nav-wrap">
+                            <div class="real-time-nav">实时</div>
+                        </div>
+                        <div class="update-interval-wrap">
+                            <div class="update-interval">刷新间隔&nbsp;&nbsp;<input type="text" id="real-time-update-interval" name="update-interval" value="" />&nbsp;&nbsp;MS</div>
+                        </div>
+                    </div>
+                    <div class="threshold-update-wrap">
+                        <div class="threshold-update">阈值修改</div>
+                    </div>
+                    <div class="threshold-update-content">
+                        <div class="threshold-update-value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阈值&nbsp;&nbsp;<input type="text" id="real-time-threshold" name="threshold-value" value="1" /></div>
+                    </div>
+                </div>
+                <div id="history-content" class="content-item">
+                    <div class="real-time">
+                        <div class="real-time-nav-wrap">
+                            <div class="real-time-nav">历史</div>
+                        </div>
+                        <div class="update-interval-wrap">
+                            <div class="inputs-wrap">
+                                <div class="inputs">
+                                    <div class="inputs-div">
+                                        <input id="year" class="year" type="radio" name="times" checked="checked" value="365" />一年
+                                    </div>
+                                    <div class="inputs-div">
+                                        <input id="month" class="month" type="radio" name="times" value="30" />一月
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="inputs">
+                                    <div class="inputs-div">
+                                        <input id="week" class="week" type="radio" name="times" value="7" />一星期
+                                    </div>
+                                    <div class="inputs-div">
+                                        <input id="day" class="day" type="radio" name="times" value="1" />一天
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="threshold-update-wrap">
+                        <div class="threshold-update">阈值修改</div>
+                    </div>
+                    <div class="threshold-update-content">
+                        <div class="threshold-update-value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阈值&nbsp;&nbsp;<input type="text" id="history-threshold" name="threshold-value" value="1" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿.model-list-wrap {
+    width: 100%;
+    height: 9%;
+}
+
+.model-list-bar {
+    width: 70%;
+    height: 85%;
+    background-color: #484462;
+    position: relative;
+    left: 15%;
+    top: 30%;
+}
+.model-list-title {
+
+text-align: center;
+
+line-height: 2;
+
+font-size: 1.5em;
+
+color: white;
+}
+.new-plan-lists-wrapper {
+    position: relative;
+    left: 15%;
+    width: 70%;
+    height: 90%;
+}
+.new-plan-img-list {
+    display: inline-block;
+    width: 39%;
+    height: 40%;
+    margin: 3% 0% 0% 7%;
+    /*实现过渡效果：在一定的时间区间内平滑地过渡*/
+    transition: All 0.4s ease-in-out;
+    -webkit-transition: All 0.4s ease-in-out;
+    -moz-transition: All 0.4s ease-in-out;
+    -o-transition: All 0.4s ease-in-out;
+}
+/*鼠标经过图片时，实现图片的上移效果*/
+    .new-plan-img-list:hover {
+        transform: translate(0,-10px);
+        -webkit-transform: translate(0,-10px);
+        -moz-transform: translate(0,-10px);
+        -o-transform: translate(0,-10px);
+        -ms-transform: translate(0,-10px);
+        -webkit-box-shadow: 0px 5px 15px #e5e5e5;
+        -moz-box-shadow: 0px 5px 15px #e5e5e5;
+        box-shadow: 0px 5px 15px #e5e5e5;
+    }
+
+.new-plan-img-box {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.new-plan-image {
+    width: 100%;
+    height: 100%;
+}
+
+.new-plan-img-note {
+    display: inline-block;
+    width: 100%;
+    height: 19%;
+    text-align: center;
+    color: white;
+    background-color: #484462;
+    line-height: 2.3;
+}
